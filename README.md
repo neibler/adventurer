@@ -25,6 +25,7 @@ adventurer/
 │   ├── makefile
 ├── README.md
 ├── .gitignore
+```
 
 ---
 
