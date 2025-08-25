@@ -17,9 +17,11 @@ obj/
 *.dll
 *.lib
 
-# bin/data 폴더는 반드시 포함해야 하므로 다시 포함시킴
-!bin/data/
-!bin/data/**
+# 빌드 결과물 무시
+/bin/*
+!/bin/data/
+/bin/data/*
+!/bin/data/**
 
 # 임시/백업 파일 무시
 *.tmp
