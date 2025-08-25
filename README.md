@@ -2,13 +2,29 @@
 
 ## 프로젝트 개요
 
-**C++ 및 OpenFrameworks 기반의 인터랙티브 미로 게임**
+**C++ 및 OpenFrameworks 기반의 인터랙티브 미로 게임 + `.maz` 생성기 포함**
 
 사용자는 미로의 시작점 (0, 0)에서 출발하여 키보드로 캐릭터를 조작하며 도착 지점까지 도달하는 것이 목표입니다.
 
 - 알고리즘: DFS, BFS, Dijkstra 알고리즘 활용해서 경로 탐색 구현 및 시각화
 - 게임 모드: 사용자가 직접 움직이며 최단 경로를 체험
-- 가중치: 벽/통로마다 무작위 가중치 적용
+- 가중치: 통로마다 무작위 가중치 적용을 통해 모험가가 길을 탐험 가
+- `.maz` 생성기 포함: C 기반 makefile 프로젝트로 `.maz` 텍스트 기반 미로 파일 생성 가능
+
+---
+
+## 폴더 구조
+```plaintext
+adventurer/
+├── game/                 # 미로 게임 본체
+│   ├── bin/data/         # .maz 파일이 위치해야 하는 곳
+│   ├── src/
+│   └── adventurer.sln
+├── generator/            # .maz 생성기 (C언어 기반, makefile 포함)
+│   ├── maze.c
+│   ├── makefile
+├── README.md
+├── .gitignore
 
 ---
 
@@ -26,16 +42,37 @@
 2. `adventurer.sln` 파일을 Visual Studio 2022로 열기  
 3. Debug 또는 Release 모드로 빌드 후 실행
 
-> ⚠️ 프로젝트가 로드되지 않는 경우, `.vcxproj` 파일 내부의 `openFrameworks*.props` 경로가 올바른지 확인하세요.  
+> ⚠️ 프로젝트가 로드되지 않는 경우, `.vcxproj` 파일 내부의 `openFrameworks*.props` 경로가 올바른지 확인하세요.
+
+---
+
+## .maz 파일 생성 및 적용 방법
+
+1. `generator/` 폴더 안의 `makefile`을 이용해 `.maz` 생성기 빌드
+    ```bash
+    cd generator
+    make
+    ./maze           # 또는 실행해서 width, height 입력 후 maze.maz 파일 생성
+    ```
+
+2. 생성된 `.maz` 파일을 아래 경로로 이동:
+    ```
+    game/bin/data/maze.maz
+    ```
+
+3. 게임 실행 후 `File > Open` 메뉴를 통해 `.maz` 파일 열기
+   
+---
 
 ## 조작 방법
 
 | 동작 | 키 또는 메뉴 |
 |------|---------------|
+| 미로 파일 열기 | 메뉴: `File > Open` (확장자: `.maz`) | ⚠️필수수
+| 정답 경로 보기 | 메뉴: `View > DFS / BFS / Dijkstra` 중 선택 |
 | 게임 시작 | 메뉴: `Game > Start` |
-| 이동 | `W`, `A`, `S`, `D` |
-| 경로 보기 | 메뉴: `View > DFS / BFS / Dijkstra` |
-| 재시작 | `R` (도착 지점 도달 후) |
+| 이동 | 키보드 `W`, `A`, `S`, `D` |
+| 재시작 | 키보드 `R` (도착 지점 도달 후) |
 | 전체화면 | `F` 키 누르기 |
 
 ---
