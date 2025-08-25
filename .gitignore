@@ -31,3 +31,7 @@ desktop.ini
 
 # 크래시 덤프 무시
 *.dmp
+
+# generator 빌드 파일 무시
+generator/maze
+generator/*.o
